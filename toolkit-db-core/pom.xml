@@ -1,0 +1,61 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>toolkit-db</artifactId>
+        <groupId>org.walkerljl</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>toolkit-db-core</artifactId>
+    <packaging>jar</packaging>
+
+    <name>toolkit-db-core</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.walkerljl</groupId>
+            <artifactId>toolkit-db-api</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.walkerljl</groupId>
+            <artifactId>toolkit-lang</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.walkerljl</groupId>
+            <artifactId>toolkit-logging</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.walkerljl</groupId>
+            <artifactId>toolkit-standard</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.walkerljl</groupId>
+            <artifactId>toolkit-cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.walkerljl</groupId>
+            <artifactId>toolkit-configuration</artifactId>
+        </dependency>
+
+        <!-- test -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+        </dependency>
+    </dependencies>
+</project>
