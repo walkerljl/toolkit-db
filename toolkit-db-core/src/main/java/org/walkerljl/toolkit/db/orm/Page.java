@@ -10,34 +10,36 @@ import java.util.List;
 
 /**
  * Page
- * 
+ *
  * @author lijunlin
  */
 public class Page<T> implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
-		
-	private static final int DEFAULT_MAX_PAGE_SIZE = 500;
-	private static final int DEFAULT_MIN_PAGE_SIZE = 20;
-	
-	private int pageSize = DEFAULT_MIN_PAGE_SIZE;
+
+    private static final long serialVersionUID = 1L;
+
+    private static final int DEFAULT_MAX_PAGE_SIZE = 500;
+    private static final int DEFAULT_MIN_PAGE_SIZE = 20;
+
+    private int pageSize = DEFAULT_MIN_PAGE_SIZE;
     private int totalCount;
     private int currentPage;
-	private List<T> data;
+    private List<T> data;
 
-	public Page() {}
+    public Page() {
+    }
 
-	public Page(int currentPage) {
+    public Page(int currentPage) {
         this.currentPage = currentPage;
-    }    
+    }
 
-	public Page(int currentPage, int pageSize) {
+    public Page(int currentPage, int pageSize) {
         this.currentPage = currentPage;
         this.pageSize = pageSize;
     }
-	
-	 /**
+
+    /**
      * 获取开始索引
+     *
      * @return
      */
     public int getStartIndex() {
@@ -46,6 +48,7 @@ public class Page<T> implements Serializable {
 
     /**
      * 获取结束索引
+     *
      * @return
      */
     public int getEndIndex() {
@@ -54,6 +57,7 @@ public class Page<T> implements Serializable {
 
     /**
      * 是否第一页
+     *
      * @return
      */
     public boolean isFirstPage() {
@@ -62,6 +66,7 @@ public class Page<T> implements Serializable {
 
     /**
      * 是否末页
+     *
      * @return
      */
     public boolean isLastPage() {
@@ -70,6 +75,7 @@ public class Page<T> implements Serializable {
 
     /**
      * 获取下一页页码
+     *
      * @return
      */
     public int getNextPage() {
@@ -78,6 +84,7 @@ public class Page<T> implements Serializable {
 
     /**
      * 获取上一页页码
+     *
      * @return
      */
     public int getPreviousPage() {
@@ -86,14 +93,16 @@ public class Page<T> implements Serializable {
 
     /**
      * 获取当前页页码
+     *
      * @return
      */
     public int getCurrentPage() {
-        return currentPage  <= 0 ? 1 : currentPage;
+        return currentPage <= 0 ? 1 : currentPage;
     }
 
     /**
      * 取得总页数
+     *
      * @return
      */
     public int getPageCount() {
@@ -102,6 +111,7 @@ public class Page<T> implements Serializable {
 
     /**
      * 取总记录数.
+     *
      * @return
      */
     public int getTotalCount() {
@@ -110,6 +120,7 @@ public class Page<T> implements Serializable {
 
     /**
      * 设置当前页
+     *
      * @param currentPage
      */
     public void setCurrentPage(int currentPage) {
@@ -118,21 +129,23 @@ public class Page<T> implements Serializable {
 
     /**
      * 获取每页数据容量.
+     *
      * @return
      */
     public int getPageSize() {
         return pageSize > DEFAULT_MAX_PAGE_SIZE ? DEFAULT_MAX_PAGE_SIZE : pageSize;
     }
-    
+
     public void setPageSize(int pageSize) {
-        if(pageSize > DEFAULT_MAX_PAGE_SIZE) {
+        if (pageSize > DEFAULT_MAX_PAGE_SIZE) {
             pageSize = DEFAULT_MAX_PAGE_SIZE;//最大DEFAULT_MAX_PAGE_SIZE条
         }
         this.pageSize = pageSize;
     }
-    
+
     /**
      * 该页是否有下一页.
+     *
      * @return
      */
     public boolean hasNextPage() {
@@ -141,6 +154,7 @@ public class Page<T> implements Serializable {
 
     /**
      * 该页是否有上一页.
+     *
      * @return
      */
     public boolean hasPreviousPage() {
@@ -149,22 +163,25 @@ public class Page<T> implements Serializable {
 
     /**
      * 获取数据集
+     *
      * @return
      */
-	public List<T> getResult() {
+    public List<T> getResult() {
         return data;
     }
 
     /**
      * 设置数据集
+     *
      * @param data
      */
-	public void setResult(List<T> data) {
+    public void setResult(List<T> data) {
         this.data = data;
     }
 
     /**
      * 设置总记录条数
+     *
      * @param totalCount
      */
     public void setTotalCount(int totalCount) {

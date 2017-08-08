@@ -3,8 +3,7 @@ package org.walkerljl.toolkit.db.ds;
 import javax.sql.DataSource;
 
 /**
- * 
- * DataSourceFactory 
+ * DataSourceFactory
  *
  * @author lijunlin
  */

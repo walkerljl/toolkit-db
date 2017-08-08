@@ -11,7 +11,6 @@ import org.walkerljl.toolkit.db.dbutil.RowProcessor;
  * <code>ResultSet</code> row into a JavaBean. This class is thread safe.
  *
  * @param <T> the target bean type
- * @see ResultSetHandler
  */
 public class BeanHandler<T> implements ResultSetHandler<T> {
 
@@ -30,7 +29,7 @@ public class BeanHandler<T> implements ResultSetHandler<T> {
      * Creates a new instance of BeanHandler.
      *
      * @param type The Class that objects returned from <code>handle()</code>
-     * are created from.
+     *             are created from.
      */
     public BeanHandler(Class<T> type) {
         this(type, ArrayHandler.ROW_PROCESSOR);
@@ -39,10 +38,10 @@ public class BeanHandler<T> implements ResultSetHandler<T> {
     /**
      * Creates a new instance of BeanHandler.
      *
-     * @param type The Class that objects returned from <code>handle()</code>
-     * are created from.
+     * @param type    The Class that objects returned from <code>handle()</code>
+     *                are created from.
      * @param convert The <code>RowProcessor</code> implementation
-     * to use when converting rows into beans.
+     *                to use when converting rows into beans.
      */
     public BeanHandler(Class<T> type, RowProcessor convert) {
         this.type = type;
@@ -52,12 +51,12 @@ public class BeanHandler<T> implements ResultSetHandler<T> {
     /**
      * Convert the first row of the <code>ResultSet</code> into a bean with the
      * <code>Class</code> given in the constructor.
+     *
      * @param rs <code>ResultSet</code> to process.
      * @return An initialized JavaBean or <code>null</code> if there were no
      * rows in the <code>ResultSet</code>.
-     *
      * @throws SQLException if a database access error occurs
-     * @see ResultSetHandler#handle(ResultSet)
+     * @see org.walkerljl.db.dbutil.ResultSetHandler#handle(ResultSet)
      */
     @Override
     public T handle(ResultSet rs) throws SQLException {

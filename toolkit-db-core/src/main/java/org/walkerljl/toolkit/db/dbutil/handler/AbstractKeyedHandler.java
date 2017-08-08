@@ -16,7 +16,7 @@ import org.walkerljl.toolkit.db.dbutil.ResultSetHandler;
  *
  * @param <K> the type of keys maintained by the returned map
  * @param <V> the type of mapped values
- * @see ResultSetHandler
+ * @see org.walkerljl.db.dbutil.ResultSetHandler
  * @since DbUtils 1.3
  */
 public abstract class AbstractKeyedHandler<K, V> implements ResultSetHandler<Map<K, V>> {
@@ -25,10 +25,11 @@ public abstract class AbstractKeyedHandler<K, V> implements ResultSetHandler<Map
     /**
      * Convert each row's columns into a Map and store then
      * in a <code>Map</code> under <code>ResultSet.getObject(key)</code> key.
+     *
      * @param rs <code>ResultSet</code> to process.
      * @return A <code>Map</code>, never <code>null</code>.
      * @throws SQLException if a database access error occurs
-     * @see ResultSetHandler#handle(ResultSet)
+     * @see org.walkerljl.db.dbutil.ResultSetHandler#handle(ResultSet)
      */
     @Override
     public Map<K, V> handle(ResultSet rs) throws SQLException {
@@ -53,6 +54,7 @@ public abstract class AbstractKeyedHandler<K, V> implements ResultSetHandler<Map
     /**
      * This factory method is called by <code>handle()</code> to retrieve the
      * key value from the current <code>ResultSet</code> row.
+     *
      * @param rs ResultSet to create a key from
      * @return K from the configured key column name/index
      * @throws SQLException if a database access error occurs
@@ -62,6 +64,7 @@ public abstract class AbstractKeyedHandler<K, V> implements ResultSetHandler<Map
     /**
      * This factory method is called by <code>handle()</code> to store the
      * current <code>ResultSet</code> row in some object.
+     *
      * @param rs ResultSet to create a row from
      * @return V object created from the current row
      * @throws SQLException if a database access error occurs

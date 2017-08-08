@@ -25,7 +25,7 @@ import org.walkerljl.toolkit.db.dbutil.ProxyFactory;
  * the column value is SQL null, an alternate value is returned. The alternate
  * value defaults to the Java <code>null</code> value, which can be overridden
  * for instances of the class.
- *
+ * <p>
  * <p>
  * Usage example:
  * <blockquote>
@@ -62,6 +62,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * The {@code getNull} string prefix.
+     *
      * @since 1.4
      */
     private static final String GET_NULL_PREFIX = "getNull";
@@ -128,6 +129,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      * Constructs a new instance of
      * <code>SqlNullCheckedResultSet</code>
      * to wrap the specified <code>ResultSet</code>.
+     *
      * @param rs ResultSet to wrap
      */
     public SqlNullCheckedResultSet(ResultSet rs) {
@@ -355,16 +357,16 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      * <code>getNull*</code> method if the <code>ResultSet</code> returned
      * <code>null</code>.
      *
-     *  @see InvocationHandler#invoke(Object, Method, Object[])
-     * @param proxy Not used; all method calls go to the internal result set
+     * @param proxy  Not used; all method calls go to the internal result set
      * @param method The method to invoke on the result set
-     * @param args The arguments to pass to the result set
+     * @param args   The arguments to pass to the result set
      * @return null checked result
      * @throws Throwable error
+     * @see InvocationHandler#invoke(Object, Method, Object[])
      */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args)
-        throws Throwable {
+            throws Throwable {
 
         Object result = method.invoke(this.rs, args);
 
@@ -373,8 +375,8 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
         // Check nullMethod != null first so that we don't call wasNull()
         // before a true getter method was invoked on the ResultSet.
         return (nullMethod != null && this.rs.wasNull())
-            ? nullMethod.invoke(this, (Object[]) null)
-            : result;
+                ? nullMethod.invoke(this, (Object[]) null)
+                : result;
     }
 
     /**

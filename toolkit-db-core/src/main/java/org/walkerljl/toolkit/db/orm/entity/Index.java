@@ -8,12 +8,12 @@ package org.walkerljl.toolkit.db.orm.entity;
 import java.io.Serializable;
 
 /**
- * Index 
+ * Index
  *
  * @author lijunlin<walkerljl@qq.com>
  */
 public class Index implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
+    private static final long serialVersionUID = 1L;
+
 }

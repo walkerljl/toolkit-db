@@ -10,7 +10,7 @@ import java.util.Iterator;
  * when you want to present a non-database application layer with domain
  * neutral data.
  * </p>
- *
+ * <p>
  * <p>
  * This implementation requires the <code>ResultSet.isLast()</code> method
  * to be implemented.
@@ -30,6 +30,7 @@ public class ResultSetIterator implements Iterator<Object[]> {
 
     /**
      * Constructor for ResultSetIterator.
+     *
      * @param rs Wrap this <code>ResultSet</code> in an <code>Iterator</code>.
      */
     public ResultSetIterator(ResultSet rs) {
@@ -38,10 +39,11 @@ public class ResultSetIterator implements Iterator<Object[]> {
 
     /**
      * Constructor for ResultSetIterator.
-     * @param rs Wrap this <code>ResultSet</code> in an <code>Iterator</code>.
+     *
+     * @param rs      Wrap this <code>ResultSet</code> in an <code>Iterator</code>.
      * @param convert The processor to use when converting a row into an
-     * <code>Object[]</code>.  Defaults to a
-     * <code>BasicRowProcessor</code>.
+     *                <code>Object[]</code>.  Defaults to a
+     *                <code>BasicRowProcessor</code>.
      */
     public ResultSetIterator(ResultSet rs, RowProcessor convert) {
         this.rs = rs;
@@ -50,6 +52,7 @@ public class ResultSetIterator implements Iterator<Object[]> {
 
     /**
      * Returns true if there are more rows in the ResultSet.
+     *
      * @return boolean <code>true</code> if there are more rows
      * @throws RuntimeException if an SQLException occurs.
      */
@@ -65,10 +68,11 @@ public class ResultSetIterator implements Iterator<Object[]> {
 
     /**
      * Returns the next row as an <code>Object[]</code>.
+     *
      * @return An <code>Object[]</code> with the same number of elements as
      * columns in the <code>ResultSet</code>.
-     * @see Iterator#next()
      * @throws RuntimeException if an SQLException occurs.
+     * @see Iterator#next()
      */
     @Override
     public Object[] next() {
@@ -83,8 +87,9 @@ public class ResultSetIterator implements Iterator<Object[]> {
 
     /**
      * Deletes the current row from the <code>ResultSet</code>.
-     * @see Iterator#remove()
+     *
      * @throws RuntimeException if an SQLException occurs.
+     * @see Iterator#remove()
      */
     @Override
     public void remove() {
@@ -98,6 +103,7 @@ public class ResultSetIterator implements Iterator<Object[]> {
     /**
      * Rethrow the SQLException as a RuntimeException.  This implementation
      * creates a new RuntimeException with the SQLException's error message.
+     *
      * @param e SQLException to rethrow
      * @since DbUtils 1.1
      */

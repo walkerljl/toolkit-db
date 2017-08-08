@@ -23,8 +23,8 @@ public interface RowProcessor {
      * the <code>ResultSet</code>.
      *
      * @param rs ResultSet that supplies the array data
-     * @throws SQLException if a database access error occurs
      * @return the newly created array
+     * @throws SQLException if a database access error occurs
      */
     Object[] toArray(ResultSet rs) throws SQLException;
 
@@ -33,11 +33,12 @@ public interface RowProcessor {
      * row.  The <code>ResultSet</code> should be positioned on a valid row before
      * passing it to this method.  Implementations of this method must not
      * alter the row position of the <code>ResultSet</code>.
-     * @param <T> The type of bean to create
-     * @param rs ResultSet that supplies the bean data
+     *
+     * @param <T>  The type of bean to create
+     * @param rs   ResultSet that supplies the bean data
      * @param type Class from which to create the bean instance
-     * @throws SQLException if a database access error occurs
      * @return the newly created bean
+     * @throws SQLException if a database access error occurs
      */
     <T> T toBean(ResultSet rs, Class<T> type) throws SQLException;
 
@@ -45,12 +46,13 @@ public interface RowProcessor {
      * Create a <code>List</code> of JavaBeans from the column values in all
      * <code>ResultSet</code> rows.  <code>ResultSet.next()</code> should
      * <strong>not</strong> be called before passing it to this method.
-     * @param <T> The type of bean to create
-     * @param rs ResultSet that supplies the bean data
+     *
+     * @param <T>  The type of bean to create
+     * @param rs   ResultSet that supplies the bean data
      * @param type Class from which to create the bean instance
-     * @throws SQLException if a database access error occurs
      * @return A <code>List</code> of beans with the given type in the order
      * they were returned by the <code>ResultSet</code>.
+     * @throws SQLException if a database access error occurs
      */
     <T> List<T> toBeanList(ResultSet rs, Class<T> type) throws SQLException;
 
@@ -62,8 +64,8 @@ public interface RowProcessor {
      * alter the row position of the <code>ResultSet</code>.
      *
      * @param rs ResultSet that supplies the map data
-     * @throws SQLException if a database access error occurs
      * @return the newly created Map
+     * @throws SQLException if a database access error occurs
      */
     Map<String, Object> toMap(ResultSet rs) throws SQLException;
 

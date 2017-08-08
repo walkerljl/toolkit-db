@@ -12,7 +12,6 @@ import org.walkerljl.toolkit.db.dbutil.RowProcessor;
  * <code>ResultSet</code> into an <code>Object[]</code>. This class is
  * thread safe.
  *
- * @see ResultSetHandler
  */
 public class ArrayHandler implements ResultSetHandler<Object[]> {
 
@@ -46,7 +45,7 @@ public class ArrayHandler implements ResultSetHandler<Object[]> {
      * Creates a new instance of ArrayHandler.
      *
      * @param convert The <code>RowProcessor</code> implementation
-     * to use when converting rows into arrays.
+     *                to use when converting rows into arrays.
      */
     public ArrayHandler(RowProcessor convert) {
         super();
@@ -55,12 +54,12 @@ public class ArrayHandler implements ResultSetHandler<Object[]> {
 
     /**
      * Places the column values from the first row in an <code>Object[]</code>.
+     *
      * @param rs <code>ResultSet</code> to process.
      * @return An Object[]. If there are no rows in the <code>ResultSet</code>
      * an empty array will be returned.
-     *
      * @throws SQLException if a database access error occurs
-     * @see ResultSetHandler#handle(ResultSet)
+     * @see org.walkerljl.db.dbutil.ResultSetHandler#handle(ResultSet)
      */
     @Override
     public Object[] handle(ResultSet rs) throws SQLException {

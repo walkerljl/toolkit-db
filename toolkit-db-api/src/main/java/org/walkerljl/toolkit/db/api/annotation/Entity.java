@@ -6,7 +6,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- *
  * 实体
  *
  * @author lijunlin
@@ -15,15 +14,17 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE})
 public @interface Entity {
 
-	/**
-	 * 表名
-	 * @return
-	 */
-	String value() default "";
-	
-	/**
-	 * 备注
-	 * @return
-	 */
-	String comment() default "";
+    /**
+     * 表名
+     *
+     * @return
+     */
+    String value() default "";
+
+    /**
+     * 备注
+     *
+     * @return
+     */
+    String comment() default "";
 }

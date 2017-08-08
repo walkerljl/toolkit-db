@@ -22,7 +22,7 @@ public class GenerousBeanProcessor extends BeanProcessor {
 
     @Override
     protected int[] mapColumnsToProperties(final ResultSetMetaData rsmd,
-            final PropertyDescriptor[] props) throws SQLException {
+                                           final PropertyDescriptor[] props) throws SQLException {
 
         final int cols = rsmd.getColumnCount();
         final int[] columnToProperty = new int[cols + 1];

@@ -6,29 +6,29 @@
 package org.walkerljl.toolkit.db.orm.sql;
 
 /**
- * AbstractEntityQuery 
+ * AbstractEntityQuery
  *
  * @author lijunlin<walkerljl@qq.com>
  */
 public abstract class AbstractEntityQuery {
 
-	private StringBuilder sql = new StringBuilder();
-	
-	public AbstractEntityQuery alias(String aliasName) {
-		sql.append(" ").append(aliasName);
-		return this;
-	}
-	
-	public AbstractEntityQuery where() {
-		sql.append(" where");
-		return this;
-	}
-	
-	public AbstractEntityQuery and(String propertyName, Object value) {
-		return this;
-	}
-	
-	public AbstractEntityQuery or(String propertyName, Object value) {
-		return this;
-	}
+    private StringBuilder sql = new StringBuilder();
+
+    public AbstractEntityQuery alias(String aliasName) {
+        sql.append(" ").append(aliasName);
+        return this;
+    }
+
+    public AbstractEntityQuery where() {
+        sql.append(" where");
+        return this;
+    }
+
+    public AbstractEntityQuery and(String propertyName, Object value) {
+        return this;
+    }
+
+    public AbstractEntityQuery or(String propertyName, Object value) {
+        return this;
+    }
 }

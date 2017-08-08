@@ -11,7 +11,7 @@ import java.util.Map;
 
 /**
  * Basic implementation of the <code>RowProcessor</code> interface.
- *
+ * <p>
  * <p>
  * This class is thread-safe.
  * </p>
@@ -58,8 +58,9 @@ public class BasicRowProcessor implements RowProcessor {
 
     /**
      * BasicRowProcessor constructor.
+     *
      * @param convert The BeanProcessor to use when converting columns to
-     * bean properties.
+     *                bean properties.
      * @since DbUtils 1.1
      */
     public BasicRowProcessor(BeanProcessor convert) {
@@ -73,10 +74,10 @@ public class BasicRowProcessor implements RowProcessor {
      * order they're returned from the <code>ResultSet</code>.  Array elements
      * will be set to <code>null</code> if the column was SQL NULL.
      *
-     * @see RowProcessor#toArray(ResultSet)
      * @param rs ResultSet that supplies the array data
-     * @throws SQLException if a database access error occurs
      * @return the newly created array
+     * @throws SQLException if a database access error occurs
+     * @see org.walkerljl.db.dbutil.RowProcessor#toArray(ResultSet)
      */
     @Override
     public Object[] toArray(ResultSet rs) throws SQLException {
@@ -94,13 +95,14 @@ public class BasicRowProcessor implements RowProcessor {
     /**
      * Convert a <code>ResultSet</code> row into a JavaBean.  This
      * implementation delegates to a BeanProcessor instance.
-     * @see RowProcessor#toBean(ResultSet, Class)
-     * @see BeanProcessor#toBean(ResultSet, Class)
-     * @param <T> The type of bean to create
-     * @param rs ResultSet that supplies the bean data
+     *
+     * @param <T>  The type of bean to create
+     * @param rs   ResultSet that supplies the bean data
      * @param type Class from which to create the bean instance
-     * @throws SQLException if a database access error occurs
      * @return the newly created bean
+     * @throws SQLException if a database access error occurs
+     * @see org.walkerljl.db.dbutil.RowProcessor#toBean(ResultSet, Class)
+     * @see org.walkerljl.db.dbutil.BeanProcessor#toBean(ResultSet, Class)
      */
     @Override
     public <T> T toBean(ResultSet rs, Class<T> type) throws SQLException {
@@ -110,14 +112,15 @@ public class BasicRowProcessor implements RowProcessor {
     /**
      * Convert a <code>ResultSet</code> into a <code>List</code> of JavaBeans.
      * This implementation delegates to a BeanProcessor instance.
-     * @see RowProcessor#toBeanList(ResultSet, Class)
-     * @see BeanProcessor#toBeanList(ResultSet, Class)
-     * @param <T> The type of bean to create
-     * @param rs ResultSet that supplies the bean data
+     *
+     * @param <T>  The type of bean to create
+     * @param rs   ResultSet that supplies the bean data
      * @param type Class from which to create the bean instance
-     * @throws SQLException if a database access error occurs
      * @return A <code>List</code> of beans with the given type in the order
      * they were returned by the <code>ResultSet</code>.
+     * @throws SQLException if a database access error occurs
+     * @see org.walkerljl.db.dbutil.RowProcessor#toBeanList(ResultSet, Class)
+     * @see org.walkerljl.db.dbutil.BeanProcessor#toBeanList(ResultSet, Class)
      */
     @Override
     public <T> List<T> toBeanList(ResultSet rs, Class<T> type) throws SQLException {
@@ -126,7 +129,7 @@ public class BasicRowProcessor implements RowProcessor {
 
     /**
      * Convert a <code>ResultSet</code> row into a <code>Map</code>.
-     *
+     * <p>
      * <p>
      * This implementation returns a <code>Map</code> with case insensitive column names as keys. Calls to
      * <code>map.get("COL")</code> and <code>map.get("col")</code> return the same value. Furthermore this implementation
@@ -137,7 +140,7 @@ public class BasicRowProcessor implements RowProcessor {
      * @param rs ResultSet that supplies the map data
      * @return the newly created Map
      * @throws SQLException if a database access error occurs
-     * @see RowProcessor#toMap(ResultSet)
+     * @see org.walkerljl.db.dbutil.RowProcessor#toMap(ResultSet)
      */
     @Override
     public Map<String, Object> toMap(ResultSet rs) throws SQLException {
@@ -148,7 +151,7 @@ public class BasicRowProcessor implements RowProcessor {
         for (int i = 1; i <= cols; i++) {
             String columnName = rsmd.getColumnLabel(i);
             if (null == columnName || 0 == columnName.length()) {
-              columnName = rsmd.getColumnName(i);
+                columnName = rsmd.getColumnName(i);
             }
             result.put(columnName, rs.getObject(i));
         }
@@ -160,11 +163,11 @@ public class BasicRowProcessor implements RowProcessor {
      * A Map that converts all keys to lowercase Strings for case insensitive
      * lookups.  This is needed for the toMap() implementation because
      * databases don't consistently handle the casing of column names.
-     *
+     * <p>
      * <p>The keys are stored as they are given [BUG #DBUTILS-34], so we maintain
      * an internal mapping from lowercase keys to the real keys in order to
      * achieve the case insensitive lookup.
-     *
+     * <p>
      * <p>Note: This implementation does not allow <tt>null</tt>
      * for key, whereas {@link LinkedHashMap} does, because of the code:
      * <pre>
@@ -174,7 +177,7 @@ public class BasicRowProcessor implements RowProcessor {
     private static class CaseInsensitiveHashMap extends LinkedHashMap<String, Object> {
         /**
          * The internal mapping from lowercase keys to the real keys.
-         *
+         * <p>
          * <p>
          * Any query operation using the key
          * ({@link #get(Object)}, {@link #containsKey(Object)})
@@ -195,7 +198,9 @@ public class BasicRowProcessor implements RowProcessor {
          */
         private static final long serialVersionUID = -2848100435296897392L;
 
-        /** {@inheritDoc} */
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public boolean containsKey(Object key) {
             Object realKey = lowerCaseMap.get(key.toString().toLowerCase(Locale.ENGLISH));
@@ -206,14 +211,18 @@ public class BasicRowProcessor implements RowProcessor {
             // return lowerCaseMap.containsKey(key.toString().toLowerCase());
         }
 
-        /** {@inheritDoc} */
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public Object get(Object key) {
             Object realKey = lowerCaseMap.get(key.toString().toLowerCase(Locale.ENGLISH));
             return super.get(realKey);
         }
 
-        /** {@inheritDoc} */
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public Object put(String key, Object value) {
             /*
@@ -229,7 +238,9 @@ public class BasicRowProcessor implements RowProcessor {
             return oldValue;
         }
 
-        /** {@inheritDoc} */
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public void putAll(Map<? extends String, ?> m) {
             for (Map.Entry<? extends String, ?> entry : m.entrySet()) {
@@ -239,7 +250,9 @@ public class BasicRowProcessor implements RowProcessor {
             }
         }
 
-        /** {@inheritDoc} */
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public Object remove(Object key) {
             Object realKey = lowerCaseMap.remove(key.toString().toLowerCase(Locale.ENGLISH));

@@ -13,7 +13,6 @@ import org.walkerljl.toolkit.db.dbutil.RowProcessor;
  * thread safe.
  *
  * @param <T> the target bean type
- * @see ResultSetHandler
  */
 public class BeanListHandler<T> implements ResultSetHandler<List<T>> {
 
@@ -32,7 +31,7 @@ public class BeanListHandler<T> implements ResultSetHandler<List<T>> {
      * Creates a new instance of BeanListHandler.
      *
      * @param type The Class that objects returned from <code>handle()</code>
-     * are created from.
+     *             are created from.
      */
     public BeanListHandler(Class<T> type) {
         this(type, ArrayHandler.ROW_PROCESSOR);
@@ -41,10 +40,10 @@ public class BeanListHandler<T> implements ResultSetHandler<List<T>> {
     /**
      * Creates a new instance of BeanListHandler.
      *
-     * @param type The Class that objects returned from <code>handle()</code>
-     * are created from.
+     * @param type    The Class that objects returned from <code>handle()</code>
+     *                are created from.
      * @param convert The <code>RowProcessor</code> implementation
-     * to use when converting rows into beans.
+     *                to use when converting rows into beans.
      */
     public BeanListHandler(Class<T> type, RowProcessor convert) {
         this.type = type;
@@ -56,11 +55,9 @@ public class BeanListHandler<T> implements ResultSetHandler<List<T>> {
      * the <code>Class</code> given in the constructor.
      *
      * @param rs The <code>ResultSet</code> to handle.
-     *
      * @return A List of beans, never <code>null</code>.
-     *
      * @throws SQLException if a database access error occurs
-     * @see RowProcessor#toBeanList(ResultSet, Class)
+     * @see org.walkerljl.db.dbutil.RowProcessor#toBeanList(ResultSet, Class)
      */
     @Override
     public List<T> handle(ResultSet rs) throws SQLException {

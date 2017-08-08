@@ -44,17 +44,18 @@ public class ProxyFactory {
     /**
      * Convenience method to generate a single-interface proxy using the handler's classloader
      *
-     * @param <T> The type of object to proxy
-     * @param type The type of object to proxy
+     * @param <T>     The type of object to proxy
+     * @param type    The type of object to proxy
      * @param handler The handler that intercepts/overrides method calls.
      * @return proxied object
      */
     public <T> T newProxyInstance(Class<T> type, InvocationHandler handler) {
-        return type.cast(Proxy.newProxyInstance(handler.getClass().getClassLoader(), new Class<?>[] {type}, handler));
+        return type.cast(Proxy.newProxyInstance(handler.getClass().getClassLoader(), new Class<?>[]{type}, handler));
     }
 
     /**
      * Creates a new proxy <code>CallableStatement</code> object.
+     *
      * @param handler The handler that intercepts/overrides method calls.
      * @return proxied CallableStatement
      */
@@ -64,6 +65,7 @@ public class ProxyFactory {
 
     /**
      * Creates a new proxy <code>Connection</code> object.
+     *
      * @param handler The handler that intercepts/overrides method calls.
      * @return proxied Connection
      */
@@ -73,6 +75,7 @@ public class ProxyFactory {
 
     /**
      * Creates a new proxy <code>Driver</code> object.
+     *
      * @param handler The handler that intercepts/overrides method calls.
      * @return proxied Driver
      */
@@ -82,6 +85,7 @@ public class ProxyFactory {
 
     /**
      * Creates a new proxy <code>PreparedStatement</code> object.
+     *
      * @param handler The handler that intercepts/overrides method calls.
      * @return proxied PreparedStatement
      */
@@ -91,6 +95,7 @@ public class ProxyFactory {
 
     /**
      * Creates a new proxy <code>ResultSet</code> object.
+     *
      * @param handler The handler that intercepts/overrides method calls.
      * @return proxied ResultSet
      */
@@ -100,6 +105,7 @@ public class ProxyFactory {
 
     /**
      * Creates a new proxy <code>ResultSetMetaData</code> object.
+     *
      * @param handler The handler that intercepts/overrides method calls.
      * @return proxied ResultSetMetaData
      */
@@ -109,6 +115,7 @@ public class ProxyFactory {
 
     /**
      * Creates a new proxy <code>Statement</code> object.
+     *
      * @param handler The handler that intercepts/overrides method calls.
      * @return proxied Statement
      */

@@ -27,6 +27,7 @@ public class QueryLoader {
 
     /**
      * Return an instance of this class.
+     *
      * @return The Singleton instance.
      */
     public static QueryLoader instance() {
@@ -53,15 +54,15 @@ public class QueryLoader {
      * <code>.xml</code> file extension.
      *
      * @param path The path that the ClassLoader will use to find the file.
-     * This is <strong>not</strong> a file system path.  If you had a jarred
-     * Queries.properties file in the com.yourcorp.app.jdbc package you would
-     * pass "/com/yourcorp/app/jdbc/Queries.properties" to this method.
-     * @throws IOException if a file access error occurs
-     * @throws IllegalArgumentException if the ClassLoader can't find a file at
-     * the given path.
-     * @throws java.util.InvalidPropertiesFormatException if the XML properties file is
-     * invalid
+     *             This is <strong>not</strong> a file system path.  If you had a jarred
+     *             Queries.properties file in the com.yourcorp.app.jdbc package you would
+     *             pass "/com/yourcorp/app/jdbc/Queries.properties" to this method.
      * @return Map of query names to SQL values
+     * @throws IOException                                if a file access error occurs
+     * @throws IllegalArgumentException                   if the ClassLoader can't find a file at
+     *                                                    the given path.
+     * @throws java.util.InvalidPropertiesFormatException if the XML properties file is
+     *                                                    invalid
      * @see Properties
      */
     public synchronized Map<String, String> load(String path) throws IOException {
@@ -81,16 +82,16 @@ public class QueryLoader {
      * reads a properties file at the given path.  The properties file can be
      * in either line-oriented or XML format.  XML formatted properties files
      * must use a <code>.xml</code> file extension.
-
+     *
      * @param path The path that the ClassLoader will use to find the file.
-     * @throws IOException if a file access error occurs
-     * @throws IllegalArgumentException if the ClassLoader can't find a file at
-     * the given path.
-     * @throws java.util.InvalidPropertiesFormatException if the XML properties file is
-     * invalid
-     * @since DbUtils 1.1
      * @return Map of query names to SQL values
+     * @throws IOException                                if a file access error occurs
+     * @throws IllegalArgumentException                   if the ClassLoader can't find a file at
+     *                                                    the given path.
+     * @throws java.util.InvalidPropertiesFormatException if the XML properties file is
+     *                                                    invalid
      * @see Properties
+     * @since DbUtils 1.1
      */
     protected Map<String, String> loadQueries(String path) throws IOException {
         // Findbugs flags getClass().getResource as a bad practice; maybe we should change the API?
@@ -113,13 +114,14 @@ public class QueryLoader {
 
         // Copy to HashMap for better performance
 
-        @SuppressWarnings({ "rawtypes", "unchecked" }) // load() always creates <String,String> entries
-        HashMap<String, String> hashMap = new HashMap(props);
+        @SuppressWarnings({"rawtypes", "unchecked"}) // load() always creates <String,String> entries
+                HashMap<String, String> hashMap = new HashMap(props);
         return hashMap;
     }
 
     /**
      * Removes the queries for the given path from the cache.
+     *
      * @param path The path that the queries were loaded from.
      */
     public synchronized void unload(String path) {

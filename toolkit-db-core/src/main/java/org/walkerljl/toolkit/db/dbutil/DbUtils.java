@@ -23,7 +23,7 @@ public final class DbUtils {
 
     /**
      * Default constructor.
-     *
+     * <p>
      * Utility classes should not have a public or default constructor,
      * but this one preserves retro-compatibility.
      *
@@ -90,10 +90,10 @@ public final class DbUtils {
      *
      * @param conn Connection to close.
      * @param stmt Statement to close.
-     * @param rs ResultSet to close.
+     * @param rs   ResultSet to close.
      */
     public static void closeQuietly(Connection conn, Statement stmt,
-            ResultSet rs) {
+                                    ResultSet rs) {
 
         try {
             closeQuietly(rs);
@@ -180,7 +180,7 @@ public final class DbUtils {
      * Loads and registers a database driver class.
      * If this succeeds, it returns true, else it returns false.
      *
-     * @param classLoader the class loader used to load the driver class
+     * @param classLoader     the class loader used to load the driver class
      * @param driverClassName of driver to load
      * @return boolean <code>true</code> if the driver was found, otherwise <code>false</code>
      * @since 1.4
@@ -194,7 +194,7 @@ public final class DbUtils {
             }
 
             @SuppressWarnings("unchecked") // guarded by previous check
-            Class<Driver> driverClass = (Class<Driver>) loadedClass;
+                    Class<Driver> driverClass = (Class<Driver>) loadedClass;
             Constructor<Driver> driverConstructor = driverClass.getConstructor();
 
             // make Constructor accessible if it is private
@@ -231,7 +231,7 @@ public final class DbUtils {
      * Print the stack trace for a SQLException to a
      * specified PrintWriter.
      *
-     * @param e SQLException to print stack trace of
+     * @param e  SQLException to print stack trace of
      * @param pw PrintWriter to print to
      */
     public static void printStackTrace(SQLException e, PrintWriter pw) {
@@ -259,7 +259,7 @@ public final class DbUtils {
      * Print warnings on a Connection to a specified PrintWriter.
      *
      * @param conn Connection to print warnings from
-     * @param pw PrintWriter to print to
+     * @param pw   PrintWriter to print to
      */
     public static void printWarnings(Connection conn, PrintWriter pw) {
         if (conn != null) {
@@ -273,6 +273,7 @@ public final class DbUtils {
 
     /**
      * Rollback any changes made on the given connection.
+     *
      * @param conn Connection to rollback.  A null value is legal.
      * @throws SQLException if a database access error occurs
      */
@@ -393,7 +394,7 @@ public final class DbUtils {
             if (parentLoggerSupported) {
                 try {
                     Method method = adapted.getClass().getMethod("getParentLogger", new Class[0]);
-                    return (Logger)method.invoke(adapted, new Object[0]);
+                    return (Logger) method.invoke(adapted, new Object[0]);
                 } catch (NoSuchMethodException e) {
                     parentLoggerSupported = false;
                     throw new SQLFeatureNotSupportedException(e);

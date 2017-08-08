@@ -24,12 +24,12 @@ import java.util.Map;
 
 /**
  * Extensions of this class convert ResultSets into other objects.
- *
+ * <p>
  * According to the <i>DRY</i> principle (Don't Repeat Yourself), repeating <code>resultSet</code>
  * variable inside the {@link ResultSetHandler#handle(ResultSet)} over and over for each iteration
  * can get a little tedious, <code>AbstractResultSetHandler</code> implicitly gives users access to
  * <code>ResultSet</code>'s methods.
- *
+ * <p>
  * <b>NOTE</b> This class is <i>NOT</i> thread safe!
  *
  * @param <T> the target type the input ResultSet will be converted to.
@@ -191,8 +191,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @param scale
      * @return
      * @throws SQLException
-     * @deprecated
      * @see ResultSet#getBigDecimal(int, int)
+     * @deprecated
      */
     @Deprecated
     protected final BigDecimal getBigDecimal(int columnIndex, int scale) throws SQLException {
@@ -214,8 +214,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @param scale
      * @return
      * @throws SQLException
-     * @deprecated
      * @see ResultSet#getBigDecimal(String, int)
+     * @deprecated
      */
     @Deprecated
     protected final BigDecimal getBigDecimal(String columnLabel, int scale) throws SQLException {
@@ -885,8 +885,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @param columnIndex
      * @return
      * @throws SQLException
-     * @deprecated
      * @see ResultSet#getUnicodeStream(int)
+     * @deprecated
      */
     @Deprecated
     protected final InputStream getUnicodeStream(int columnIndex) throws SQLException {
@@ -897,8 +897,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @param columnLabel
      * @return
      * @throws SQLException
-     * @deprecated
      * @see ResultSet#getUnicodeStream(String)
+     * @deprecated
      */
     @Deprecated
     protected final InputStream getUnicodeStream(String columnLabel) throws SQLException {

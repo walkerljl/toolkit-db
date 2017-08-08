@@ -17,11 +17,11 @@
 
     <properties>
         <jdk.version>1.6</jdk.version>
-        <toolkit-lang.version>1.0-SNAPSHOT</toolkit-lang.version>
-        <toolkit-logging.version>1.0-SNAPSHOT</toolkit-logging.version>
-        <toolkit-standard.version>1.0-SNAPSHOT</toolkit-standard.version>
-        <toolkit-cache.version>1.0-SNAPSHOT</toolkit-cache.version>
-        <toolkit-configuration.version>1.0-SNAPSHOT</toolkit-configuration.version>
+        <org.walkerljl.toolkit.lang.version>1.0-SNAPSHOT</org.walkerljl.toolkit.lang.version>
+        <org.walkerljl.toolkit.logging.version>1.0-SNAPSHOT</org.walkerljl.toolkit.logging.version>
+        <org.walkerljl.toolkit.standard.version>1.0-SNAPSHOT</org.walkerljl.toolkit.standard.version>
+        <org.walkerljl.toolkit.cache.version>1.0-SNAPSHOT</org.walkerljl.toolkit.cache.version>
+        <org.walkerljl.configuration.version>1.0-SNAPSHOT</org.walkerljl.configuration.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -46,27 +46,27 @@
             <dependency>
                 <groupId>org.walkerljl</groupId>
                 <artifactId>toolkit-lang</artifactId>
-                <version>${toolkit-lang.version}</version>
+                <version>${org.walkerljl.toolkit.lang.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.walkerljl</groupId>
                 <artifactId>toolkit-logging</artifactId>
-                <version>${toolkit-logging.version}</version>
+                <version>${org.walkerljl.toolkit.logging.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.walkerljl</groupId>
                 <artifactId>toolkit-standard</artifactId>
-                <version>${toolkit-standard.version}</version>
+                <version>${org.walkerljl.toolkit.standard.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.walkerljl</groupId>
                 <artifactId>toolkit-cache</artifactId>
-                <version>${toolkit-cache.version}</version>
+                <version>${org.walkerljl.toolkit.cache.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.walkerljl</groupId>
-                <artifactId>toolkit-configuration</artifactId>
-                <version>${toolkit-configuration.version}</version>
+                <artifactId>configuration-client</artifactId>
+                <version>${org.walkerljl.configuration.version}</version>
             </dependency>
 
             <!-- Datasource -->
@@ -110,5 +110,17 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <dependencies>
+        <!-- test -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

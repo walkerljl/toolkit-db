@@ -2,12 +2,11 @@ package org.walkerljl.toolkit.db.ds.abstracts;
 
 import javax.sql.DataSource;
 
+import org.walkerljl.configuration.client.ConfiguratorFactory;
 import org.walkerljl.toolkit.db.ds.DataSourceFactory;
-import org.walkerljl.toolkit.configuration.ConfiguratorFactory;
 
 /**
- * 
- * AbstractDataSourceFactory 
+ * AbstractDataSourceFactory
  *
  * @author lijunlin
  */
@@ -28,7 +27,7 @@ public abstract class AbstractDataSourceFactory<T extends DataSource> implements
     }
 
     protected String getPropertyAsString(String key) {
-        return ConfiguratorFactory.getInstance().getStdConfigurator().getAsString(key);
+        return ConfiguratorFactory.getStdConfigurator().getAsString(key);
     }
 
     public abstract T createDataSource();

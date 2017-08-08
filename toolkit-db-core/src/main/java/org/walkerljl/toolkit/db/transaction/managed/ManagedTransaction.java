@@ -20,56 +20,56 @@ import org.walkerljl.toolkit.logging.LoggerFactory;
  * @see ManagedTransactionFactory
  */
 public class ManagedTransaction implements Transaction {
-	
-	private static final Logger LOG = LoggerFactory.getLogger(ManagedTransaction.class);
 
-	private DataSource                dataSource;
-	private TransactionIsolationLevel level;
-	private Connection                connection;
-	private boolean                   closeConnection;
+    private static final Logger LOG = LoggerFactory.getLogger(ManagedTransaction.class);
 
-	public ManagedTransaction(Connection connection, boolean closeConnection) {
-		this.connection = connection;
-		this.closeConnection = closeConnection;
-	}
+    private DataSource                dataSource;
+    private TransactionIsolationLevel level;
+    private Connection                connection;
+    private boolean                   closeConnection;
 
-	public ManagedTransaction(DataSource ds, TransactionIsolationLevel level, boolean closeConnection) {
-		this.dataSource = ds;
-		this.level = level;
-		this.closeConnection = closeConnection;
-	}
+    public ManagedTransaction(Connection connection, boolean closeConnection) {
+        this.connection = connection;
+        this.closeConnection = closeConnection;
+    }
 
-	public Connection getConnection() throws SQLException {
-		if (this.connection == null) {
-			openConnection();
-		}
-		return this.connection;
-	}
+    public ManagedTransaction(DataSource ds, TransactionIsolationLevel level, boolean closeConnection) {
+        this.dataSource = ds;
+        this.level = level;
+        this.closeConnection = closeConnection;
+    }
 
-	public void commit() throws SQLException {
-		// Does nothing
-	}
+    public Connection getConnection() throws SQLException {
+        if (this.connection == null) {
+            openConnection();
+        }
+        return this.connection;
+    }
 
-	public void rollback() throws SQLException {
-		// Does nothing
-	}
+    public void commit() throws SQLException {
+        // Does nothing
+    }
 
-	public void close() throws SQLException {
-		if (this.closeConnection && this.connection != null) {
-			if (LOG.isDebugEnabled()) {
-				LOG.debug("Closing JDBC Connection [" + this.connection + "]");
-			}
-			this.connection.close();
-		}
-	}
+    public void rollback() throws SQLException {
+        // Does nothing
+    }
 
-	protected void openConnection() throws SQLException {
-		if (LOG.isDebugEnabled()) {
-			LOG.debug("Opening JDBC Connection");
-		}
-		this.connection = this.dataSource.getConnection();
-		if (this.level != null) {
-			this.connection.setTransactionIsolation(this.level.getLevel());
-		}
-	}
+    public void close() throws SQLException {
+        if (this.closeConnection && this.connection != null) {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Closing JDBC Connection [" + this.connection + "]");
+            }
+            this.connection.close();
+        }
+    }
+
+    protected void openConnection() throws SQLException {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Opening JDBC Connection");
+        }
+        this.connection = this.dataSource.getConnection();
+        if (this.level != null) {
+            this.connection.setTransactionIsolation(this.level.getLevel());
+        }
+    }
 }

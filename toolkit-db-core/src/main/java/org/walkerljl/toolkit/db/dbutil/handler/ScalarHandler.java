@@ -10,7 +10,6 @@ import org.walkerljl.toolkit.db.dbutil.ResultSetHandler;
  * <code>ResultSet</code> column into an Object. This class is thread safe.
  *
  * @param <T> The type of the scalar
- * @see ResultSetHandler
  */
 public class ScalarHandler<T> implements ResultSetHandler<T> {
 
@@ -37,7 +36,7 @@ public class ScalarHandler<T> implements ResultSetHandler<T> {
      * Creates a new instance of ScalarHandler.
      *
      * @param columnIndex The index of the column to retrieve from the
-     * <code>ResultSet</code>.
+     *                    <code>ResultSet</code>.
      */
     public ScalarHandler(int columnIndex) {
         this(columnIndex, null);
@@ -47,17 +46,19 @@ public class ScalarHandler<T> implements ResultSetHandler<T> {
      * Creates a new instance of ScalarHandler.
      *
      * @param columnName The name of the column to retrieve from the
-     * <code>ResultSet</code>.
+     *                   <code>ResultSet</code>.
      */
     public ScalarHandler(String columnName) {
         this(1, columnName);
     }
 
-    /** Helper constructor
+    /**
+     * Helper constructor
+     *
      * @param columnIndex The index of the column to retrieve from the
-     * <code>ResultSet</code>.
-     * @param columnName The name of the column to retrieve from the
-     * <code>ResultSet</code>.
+     *                    <code>ResultSet</code>.
+     * @param columnName  The name of the column to retrieve from the
+     *                    <code>ResultSet</code>.
      */
     private ScalarHandler(int columnIndex, String columnName) {
         this.columnIndex = columnIndex;
@@ -68,14 +69,13 @@ public class ScalarHandler<T> implements ResultSetHandler<T> {
      * Returns one <code>ResultSet</code> column as an object via the
      * <code>ResultSet.getObject()</code> method that performs type
      * conversions.
+     *
      * @param rs <code>ResultSet</code> to process.
      * @return The column or <code>null</code> if there are no rows in
      * the <code>ResultSet</code>.
-     *
-     * @throws SQLException if a database access error occurs
+     * @throws SQLException       if a database access error occurs
      * @throws ClassCastException if the class datatype does not match the column type
-     *
-     * @see ResultSetHandler#handle(ResultSet)
+     * @see org.walkerljl.db.dbutil.ResultSetHandler#handle(ResultSet)
      */
     // We assume that the user has picked the correct type to match the column
     // so getObject will return the appropriate type and the cast will succeed.

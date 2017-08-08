@@ -8,12 +8,12 @@ package org.walkerljl.toolkit.db.orm.sql;
 import java.io.Serializable;
 
 /**
- * EntityDeleteCondition 
+ * EntityDeleteCondition
  *
  * @author lijunlin<walkerljl@qq.com>
  */
 public class EntityDeleteCondition implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
 }

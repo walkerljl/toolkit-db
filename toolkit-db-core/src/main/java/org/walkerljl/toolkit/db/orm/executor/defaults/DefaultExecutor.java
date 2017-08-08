@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.walkerljl.toolkit.db.DbException;
 import org.walkerljl.toolkit.db.dbutil.BasicRowProcessor;
 import org.walkerljl.toolkit.db.dbutil.BeanProcessor;
 import org.walkerljl.toolkit.db.dbutil.QueryRunner;
@@ -24,41 +25,44 @@ import org.walkerljl.toolkit.db.dbutil.handler.MapHandler;
 import org.walkerljl.toolkit.db.dbutil.handler.MapListHandler;
 import org.walkerljl.toolkit.db.dbutil.handler.ScalarHandler;
 import org.walkerljl.toolkit.db.orm.DataAccessException;
-import org.walkerljl.toolkit.db.orm.entity.Table;
+import org.walkerljl.toolkit.db.orm.TableInfoManager;
+import org.walkerljl.toolkit.db.orm.entity.TableInfo;
 import org.walkerljl.toolkit.db.orm.executor.Executor;
-import org.walkerljl.toolkit.db.orm.parse.TableManager;
 import org.walkerljl.toolkit.lang.ArraysUtils;
 import org.walkerljl.toolkit.lang.MapUtils;
 import org.walkerljl.toolkit.logging.Logger;
 import org.walkerljl.toolkit.logging.LoggerFactory;
 
 /**
- * 默认数据访问器 
+ * 默认数据访问器
  *
  * @author lijunlin
  */
 public class DefaultExecutor implements Executor {
 
-	private static final String MESSAGE_QUERY_FAILURE = "Query failure";
-	private static final String MESSAGE_UPDATE_FAILURE = "Update failure";
-	private static final String MESSAGE_INSERT_FAILURE = "Insert failure";
-	
+    private static final String MESSAGE_QUERY_FAILURE = "Query failure";
+    private static final String MESSAGE_UPDATE_FAILURE = "Update failure";
+    private static final String MESSAGE_INSERT_FAILURE = "Insert failure";
+
     private static final Logger LOG = LoggerFactory.getLogger(DefaultExecutor.class);
 
-    /** 连接池*/
+    /**
+     * 连接池
+     */
     private static final ThreadLocal<Connection> CONNECTION_POOL = new ThreadLocal<Connection>();
-    private final DataSource dataSource;
+    private final DataSource  dataSource;
     private final QueryRunner queryRunner;
 
     /**
      * 构造函数
+     *
      * @param dataSource
      */
     public DefaultExecutor(DataSource dataSource) {
-    	this.dataSource = dataSource;
+        this.dataSource = dataSource;
         queryRunner = new QueryRunner(this.dataSource);
     }
-    
+
     @Override
     public <T> T queryEntity(Class<T> entityClass, String sql, Object... params) {
         T result;
@@ -70,10 +74,10 @@ public class DefaultExecutor implements Executor {
                 result = queryRunner.query(sql, new BeanHandler<T>(entityClass), params);
             }
         } catch (SQLException e) {
-        	LOG.error(MESSAGE_QUERY_FAILURE, e);
+            LOG.error(MESSAGE_QUERY_FAILURE, e);
             throw new DataAccessException(e);
         } finally {
-        	printSQL(sql, params);
+            printSQL(sql, params);
         }
         return result;
     }
@@ -89,10 +93,10 @@ public class DefaultExecutor implements Executor {
                 result = queryRunner.query(sql, new BeanListHandler<T>(entityClass), params);
             }
         } catch (SQLException e) {
-        	LOG.error(MESSAGE_QUERY_FAILURE, e);
+            LOG.error(MESSAGE_QUERY_FAILURE, e);
             throw new DataAccessException(e);
         } finally {
-        	printSQL(sql, params);
+            printSQL(sql, params);
         }
         return result;
     }
@@ -103,10 +107,10 @@ public class DefaultExecutor implements Executor {
         try {
             entityMap = queryRunner.query(sql, new BeanMapHandler<K, V>(entityClass), params);
         } catch (SQLException e) {
-        	LOG.error(MESSAGE_QUERY_FAILURE, e);
+            LOG.error(MESSAGE_QUERY_FAILURE, e);
             throw new DataAccessException(e);
         } finally {
-        	printSQL(sql, params);
+            printSQL(sql, params);
         }
         return entityMap;
     }
@@ -117,10 +121,10 @@ public class DefaultExecutor implements Executor {
         try {
             array = queryRunner.query(sql, new ArrayHandler(), params);
         } catch (SQLException e) {
-        	LOG.error(MESSAGE_QUERY_FAILURE, e);
+            LOG.error(MESSAGE_QUERY_FAILURE, e);
             throw new DataAccessException(e);
         } finally {
-        	printSQL(sql, params);
+            printSQL(sql, params);
         }
         return array;
     }
@@ -131,10 +135,10 @@ public class DefaultExecutor implements Executor {
         try {
             arrayList = queryRunner.query(sql, new ArrayListHandler(), params);
         } catch (SQLException e) {
-        	LOG.error(MESSAGE_QUERY_FAILURE, e);
+            LOG.error(MESSAGE_QUERY_FAILURE, e);
             throw new DataAccessException(e);
         } finally {
-        	printSQL(sql, params);
+            printSQL(sql, params);
         }
         return arrayList;
     }
@@ -145,10 +149,10 @@ public class DefaultExecutor implements Executor {
         try {
             map = queryRunner.query(sql, new MapHandler(), params);
         } catch (SQLException e) {
-        	LOG.error(MESSAGE_QUERY_FAILURE, e);
+            LOG.error(MESSAGE_QUERY_FAILURE, e);
             throw new DataAccessException(e);
         } finally {
-        	printSQL(sql, params);
+            printSQL(sql, params);
         }
         return map;
     }
@@ -159,10 +163,10 @@ public class DefaultExecutor implements Executor {
         try {
             fieldMapList = queryRunner.query(sql, new MapListHandler(), params);
         } catch (SQLException e) {
-        	LOG.error(MESSAGE_QUERY_FAILURE, e);
+            LOG.error(MESSAGE_QUERY_FAILURE, e);
             throw new DataAccessException(e);
         } finally {
-        	printSQL(sql, params);
+            printSQL(sql, params);
         }
         return fieldMapList;
     }
@@ -173,10 +177,10 @@ public class DefaultExecutor implements Executor {
         try {
             obj = queryRunner.query(sql, new ScalarHandler<T>(), params);
         } catch (SQLException e) {
-        	LOG.error(MESSAGE_QUERY_FAILURE, e);
+            LOG.error(MESSAGE_QUERY_FAILURE, e);
             throw new RuntimeException(e);
         } finally {
-        	printSQL(sql, params);
+            printSQL(sql, params);
         }
         return obj;
     }
@@ -187,10 +191,10 @@ public class DefaultExecutor implements Executor {
         try {
             list = queryRunner.query(sql, new ColumnListHandler<T>(), params);
         } catch (SQLException e) {
-        	LOG.error(MESSAGE_QUERY_FAILURE, e);
+            LOG.error(MESSAGE_QUERY_FAILURE, e);
             throw new RuntimeException(e);
         } finally {
-        	printSQL(sql, params);
+            printSQL(sql, params);
         }
         return list;
     }
@@ -201,24 +205,24 @@ public class DefaultExecutor implements Executor {
         try {
             map = queryRunner.query(sql, new KeyedHandler<T>(column), params);
         } catch (SQLException e) {
-        	LOG.error(MESSAGE_QUERY_FAILURE, e);
+            LOG.error(MESSAGE_QUERY_FAILURE, e);
             throw new RuntimeException(e);
         } finally {
-        	printSQL(sql, params);
+            printSQL(sql, params);
         }
         return map;
     }
 
     @Override
     public int queryCount(String sql, Object... params) {
-    	Long result;
+        Long result;
         try {
             result = queryRunner.query(sql, new ScalarHandler<Long>("count(1)"), params);
         } catch (SQLException e) {
-        	LOG.error(MESSAGE_QUERY_FAILURE, e);
+            LOG.error(MESSAGE_QUERY_FAILURE, e);
             throw new RuntimeException(e);
         } finally {
-        	printSQL(sql, params);
+            printSQL(sql, params);
         }
         return (result == null ? 0 : result.intValue());
     }
@@ -230,10 +234,10 @@ public class DefaultExecutor implements Executor {
             Connection conn = getConnection();
             result = queryRunner.update(conn, sql, params);
         } catch (SQLException e) {
-        	LOG.error(MESSAGE_UPDATE_FAILURE, e);
+            LOG.error(MESSAGE_UPDATE_FAILURE, e);
             throw new DataAccessException(e);
         } finally {
-        	printSQL(sql, params);
+            printSQL(sql, params);
         }
         return result;
     }
@@ -257,50 +261,53 @@ public class DefaultExecutor implements Executor {
                 }
             }
         } catch (SQLException e) {
-        	LOG.error(MESSAGE_INSERT_FAILURE, e);
+            LOG.error(MESSAGE_INSERT_FAILURE, e);
             throw new DataAccessException(e);
         } finally {
-        	printSQL(sql, params);
+            printSQL(sql, params);
         }
         return key;
     }
 
     /**
      * 获取字段、属性映射Map
+     *
      * @param entityClass
      * @return
      */
     private <T> Map<String, String> getColumnToPropertyMap(Class<T> entityClass) {
-    	Table table = TableManager.getInstance().getTable(entityClass);
-    	if (table == null) {
-    		LOG.warn("Fail to get table by " + entityClass);
-    		return null;
-    	}
-    	return table.getColumnToPropertyMap();
+        TableInfo table = TableInfoManager.getInstance().getTable(entityClass);
+        if (table == null) {
+            LOG.warn("Fail to get table by " + entityClass);
+            return null;
+        }
+        return table.getColumnToPropertyMap();
     }
 
     /**
      * 打印执行SQL和参数
+     *
      * @param sql
      * @param params
      */
     private void printSQL(String sql, Object... params) {
-    	if (LOG.isDebugEnabled()) {
-    		LOG.debug("[orgwalkerljl-db] SQL - " + sql);
-    		int paramsLength = ArraysUtils.size(params);
-    		if (paramsLength != 0) {
-    			StringBuilder paramsString = new StringBuilder();
-    			paramsString.append(params[0] == null ? "null" : params[0].toString());
-    			for (int i = 1; i < params.length; i++) {
-    				paramsString.append(", ").append(params[i] == null ? "null" : params[i].toString());
-    			}
-    			LOG.debug("[orgwalkerljl-db] PARAMS - " + paramsString.toString());
-    		}
-    	}
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("[orgwalkerljl-db] SQL - " + sql);
+            int paramsLength = ArraysUtils.size(params);
+            if (paramsLength != 0) {
+                StringBuilder paramsString = new StringBuilder();
+                paramsString.append(params[0] == null ? "null" : params[0].toString());
+                for (int i = 1; i < params.length; i++) {
+                    paramsString.append(", ").append(params[i] == null ? "null" : params[i].toString());
+                }
+                LOG.debug("[orgwalkerljl-db] PARAMS - " + paramsString.toString());
+            }
+        }
     }
-    
+
     /**
      * 获取数据库连接
+     *
      * @return
      */
     private Connection getConnection() {
@@ -314,8 +321,8 @@ public class DefaultExecutor implements Executor {
                 }
             }
         } catch (SQLException e) {
-        	LOG.error("Fail to get connection", e);
-            throw new RuntimeException(e);
+            LOG.error("Fail to get connection", e);
+            throw new DbException(e);
         }
         return conn;
     }

@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.walkerljl.toolkit.db.dbutil.RowProcessor;
-import org.walkerljl.toolkit.db.dbutil.ResultSetHandler;
 
 /**
  * <p>
@@ -15,7 +14,7 @@ import org.walkerljl.toolkit.db.dbutil.ResultSetHandler;
  * <p>
  * If you had a Person table with a primary key column called ID, you could
  * retrieve rows from the table like this:
- *
+ * <p>
  * <pre>
  * ResultSetHandler&lt;Map&lt;Long, Person&gt;&gt; h = new BeanMapdHandler&lt;Long, Person&gt;(Person.class, &quot;id&quot;);
  * Map&amp;ltLong, Person&gt; found = queryRunner.query(&quot;select id, name, age from person&quot;, h);
@@ -23,7 +22,7 @@ import org.walkerljl.toolkit.db.dbutil.ResultSetHandler;
  * String janesName = jane.getName();
  * Integer janesAge = jane.getAge();
  * </pre>
- *
+ * <p>
  * Note that the "id" passed to BeanMapHandler can be in any case. The data type
  * returned for id is dependent upon how your JDBC driver converts SQL column
  * types from the Person table into Java types. The "name" and "age" columns are
@@ -33,11 +32,8 @@ import org.walkerljl.toolkit.db.dbutil.ResultSetHandler;
  * This class is thread safe.
  * </p>
  *
- * @param <K>
- *            the type of keys maintained by the returned map
- * @param <V>
- *            the type of the bean
- * @see ResultSetHandler
+ * @param <K> the type of keys maintained by the returned map
+ * @param <V> the type of the bean
  * @since DbUtils 1.5
  */
 public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
@@ -67,9 +63,8 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
      * Creates a new instance of BeanMapHandler. The value of the first column
      * of each row will be a key in the Map.
      *
-     * @param type
-     *            The Class that objects returned from <code>createRow()</code>
-     *            are created from.
+     * @param type The Class that objects returned from <code>createRow()</code>
+     *             are created from.
      */
     public BeanMapHandler(Class<V> type) {
         this(type, ArrayHandler.ROW_PROCESSOR, 1, null);
@@ -79,12 +74,10 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
      * Creates a new instance of BeanMapHandler. The value of the first column
      * of each row will be a key in the Map.
      *
-     * @param type
-     *            The Class that objects returned from <code>createRow()</code>
-     *            are created from.
-     * @param convert
-     *            The <code>RowProcessor</code> implementation to use when
-     *            converting rows into Beans
+     * @param type    The Class that objects returned from <code>createRow()</code>
+     *                are created from.
+     * @param convert The <code>RowProcessor</code> implementation to use when
+     *                converting rows into Beans
      */
     public BeanMapHandler(Class<V> type, RowProcessor convert) {
         this(type, convert, 1, null);
@@ -93,12 +86,10 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
     /**
      * Creates a new instance of BeanMapHandler.
      *
-     * @param type
-     *            The Class that objects returned from <code>createRow()</code>
-     *            are created from.
-     * @param columnIndex
-     *            The values to use as keys in the Map are retrieved from the
-     *            column at this index.
+     * @param type        The Class that objects returned from <code>createRow()</code>
+     *                    are created from.
+     * @param columnIndex The values to use as keys in the Map are retrieved from the
+     *                    column at this index.
      */
     public BeanMapHandler(Class<V> type, int columnIndex) {
         this(type, ArrayHandler.ROW_PROCESSOR, columnIndex, null);
@@ -107,12 +98,10 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
     /**
      * Creates a new instance of BeanMapHandler.
      *
-     * @param type
-     *            The Class that objects returned from <code>createRow()</code>
-     *            are created from.
-     * @param columnName
-     *            The values to use as keys in the Map are retrieved from the
-     *            column with this name.
+     * @param type       The Class that objects returned from <code>createRow()</code>
+     *                   are created from.
+     * @param columnName The values to use as keys in the Map are retrieved from the
+     *                   column with this name.
      */
     public BeanMapHandler(Class<V> type, String columnName) {
         this(type, ArrayHandler.ROW_PROCESSOR, 1, columnName);
@@ -121,18 +110,15 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
     /**
      * Private Helper
      *
-     * @param convert
-     *            The <code>RowProcessor</code> implementation to use when
-     *            converting rows into Beans
-     * @param columnIndex
-     *            The values to use as keys in the Map are retrieved from the
-     *            column at this index.
-     * @param columnName
-     *            The values to use as keys in the Map are retrieved from the
-     *            column with this name.
+     * @param convert     The <code>RowProcessor</code> implementation to use when
+     *                    converting rows into Beans
+     * @param columnIndex The values to use as keys in the Map are retrieved from the
+     *                    column at this index.
+     * @param columnName  The values to use as keys in the Map are retrieved from the
+     *                    column with this name.
      */
     private BeanMapHandler(Class<V> type, RowProcessor convert,
-            int columnIndex, String columnName) {
+                           int columnIndex, String columnName) {
         super();
         this.type = type;
         this.convert = convert;
@@ -143,14 +129,12 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
     /**
      * This factory method is called by <code>handle()</code> to retrieve the
      * key value from the current <code>ResultSet</code> row.
+     *
      * @param rs ResultSet to create a key from
-     *
      * @return K from the configured key column name/index
-     *
-     * @throws SQLException if a database access error occurs
+     * @throws SQLException       if a database access error occurs
      * @throws ClassCastException if the class datatype does not match the column type
-     *
-     * @see AbstractKeyedHandler#createKey(ResultSet)
+     * @see org.walkerljl.db.dbutil.handler.AbstractKeyedHandler#createKey(ResultSet)
      */
     // We assume that the user has picked the correct type to match the column
     // so getObject will return the appropriate type and the cast will succeed.
@@ -158,8 +142,8 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
     @Override
     protected K createKey(ResultSet rs) throws SQLException {
         return (columnName == null) ?
-               (K) rs.getObject(columnIndex) :
-               (K) rs.getObject(columnName);
+                (K) rs.getObject(columnIndex) :
+                (K) rs.getObject(columnName);
     }
 
     @Override

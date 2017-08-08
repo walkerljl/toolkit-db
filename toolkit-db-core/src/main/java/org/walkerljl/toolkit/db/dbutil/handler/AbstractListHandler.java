@@ -12,7 +12,6 @@ import org.walkerljl.toolkit.db.dbutil.ResultSetHandler;
  * classes that convert <code>ResultSet</code> into <code>List</code>.
  *
  * @param <T> the target List generic type
- * @see ResultSetHandler
  */
 public abstract class AbstractListHandler<T> implements ResultSetHandler<List<T>> {
     /**
@@ -20,10 +19,10 @@ public abstract class AbstractListHandler<T> implements ResultSetHandler<List<T>
      * result. To convert individual rows into Java objects it uses
      * <code>handleRow(ResultSet)</code> method.
      *
-     * @see #handleRow(ResultSet)
      * @param rs <code>ResultSet</code> to process.
      * @return a list of all rows in the result set
      * @throws SQLException error occurs
+     * @see #handleRow(ResultSet)
      */
     @Override
     public List<T> handle(ResultSet rs) throws SQLException {

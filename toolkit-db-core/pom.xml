@@ -41,7 +41,7 @@
         </dependency>
         <dependency>
             <groupId>org.walkerljl</groupId>
-            <artifactId>toolkit-configuration</artifactId>
+            <artifactId>configuration-client</artifactId>
         </dependency>
 
         <!-- test -->

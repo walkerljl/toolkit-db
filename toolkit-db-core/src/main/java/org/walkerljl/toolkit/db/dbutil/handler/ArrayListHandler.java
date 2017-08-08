@@ -4,14 +4,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.walkerljl.toolkit.db.dbutil.RowProcessor;
-import org.walkerljl.toolkit.db.dbutil.ResultSetHandler;
 
 /**
  * <code>ResultSetHandler</code> implementation that converts the
  * <code>ResultSet</code> into a <code>List</code> of <code>Object[]</code>s.
  * This class is thread safe.
  *
- * @see ResultSetHandler
  */
 public class ArrayListHandler extends AbstractListHandler<Object[]> {
 
@@ -33,7 +31,7 @@ public class ArrayListHandler extends AbstractListHandler<Object[]> {
      * Creates a new instance of ArrayListHandler.
      *
      * @param convert The <code>RowProcessor</code> implementation
-     * to use when converting rows into Object[]s.
+     *                to use when converting rows into Object[]s.
      */
     public ArrayListHandler(RowProcessor convert) {
         super();
@@ -43,11 +41,11 @@ public class ArrayListHandler extends AbstractListHandler<Object[]> {
 
     /**
      * Convert row's columns into an <code>Object[]</code>.
+     *
      * @param rs <code>ResultSet</code> to process.
      * @return <code>Object[]</code>, never <code>null</code>.
-     *
      * @throws SQLException if a database access error occurs
-     * @see AbstractListHandler#handle(ResultSet)
+     * @see org.walkerljl.db.dbutil.handler.AbstractListHandler#handle(ResultSet)
      */
     @Override
     protected Object[] handleRow(ResultSet rs) throws SQLException {

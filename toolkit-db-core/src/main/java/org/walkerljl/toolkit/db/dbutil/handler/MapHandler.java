@@ -12,7 +12,6 @@ import org.walkerljl.toolkit.db.dbutil.RowProcessor;
  * <code>ResultSet</code> row into a <code>Map</code>. This class is thread
  * safe.
  *
- * @see ResultSetHandler
  */
 public class MapHandler implements ResultSetHandler<Map<String, Object>> {
 
@@ -34,7 +33,7 @@ public class MapHandler implements ResultSetHandler<Map<String, Object>> {
      * Creates a new instance of MapHandler.
      *
      * @param convert The <code>RowProcessor</code> implementation
-     * to use when converting rows into Maps.
+     *                to use when converting rows into Maps.
      */
     public MapHandler(RowProcessor convert) {
         super();
@@ -44,13 +43,12 @@ public class MapHandler implements ResultSetHandler<Map<String, Object>> {
     /**
      * Converts the first row in the <code>ResultSet</code> into a
      * <code>Map</code>.
+     *
      * @param rs <code>ResultSet</code> to process.
      * @return A <code>Map</code> with the values from the first row or
      * <code>null</code> if there are no rows in the <code>ResultSet</code>.
-     *
      * @throws SQLException if a database access error occurs
-     *
-     * @see ResultSetHandler#handle(ResultSet)
+     * @see org.walkerljl.db.dbutil.ResultSetHandler#handle(ResultSet)
      */
     @Override
     public Map<String, Object> handle(ResultSet rs) throws SQLException {

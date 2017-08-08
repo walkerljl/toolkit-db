@@ -3,15 +3,12 @@ package org.walkerljl.toolkit.db.dbutil.handler;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.walkerljl.toolkit.db.dbutil.ResultSetHandler;
-
 /**
  * <code>ResultSetHandler</code> implementation that converts one
  * <code>ResultSet</code> column into a <code>List</code> of
  * <code>Object</code>s. This class is thread safe.
  *
  * @param <T> The type of the column.
- * @see ResultSetHandler
  * @since DbUtils 1.1
  */
 public class ColumnListHandler<T> extends AbstractListHandler<T> {
@@ -39,7 +36,7 @@ public class ColumnListHandler<T> extends AbstractListHandler<T> {
      * Creates a new instance of ColumnListHandler.
      *
      * @param columnIndex The index of the column to retrieve from the
-     * <code>ResultSet</code>.
+     *                    <code>ResultSet</code>.
      */
     public ColumnListHandler(int columnIndex) {
         this(columnIndex, null);
@@ -49,17 +46,19 @@ public class ColumnListHandler<T> extends AbstractListHandler<T> {
      * Creates a new instance of ColumnListHandler.
      *
      * @param columnName The name of the column to retrieve from the
-     * <code>ResultSet</code>.
+     *                   <code>ResultSet</code>.
      */
     public ColumnListHandler(String columnName) {
         this(1, columnName);
     }
 
-    /** Private Helper
+    /**
+     * Private Helper
+     *
      * @param columnIndex The index of the column to retrieve from the
-     * <code>ResultSet</code>.
-     * @param columnName The name of the column to retrieve from the
-     * <code>ResultSet</code>.
+     *                    <code>ResultSet</code>.
+     * @param columnName  The name of the column to retrieve from the
+     *                    <code>ResultSet</code>.
      */
     private ColumnListHandler(int columnIndex, String columnName) {
         super();
@@ -69,13 +68,12 @@ public class ColumnListHandler<T> extends AbstractListHandler<T> {
 
     /**
      * Returns one <code>ResultSet</code> column value as <code>Object</code>.
+     *
      * @param rs <code>ResultSet</code> to process.
      * @return <code>Object</code>, never <code>null</code>.
-     *
-     * @throws SQLException if a database access error occurs
+     * @throws SQLException       if a database access error occurs
      * @throws ClassCastException if the class datatype does not match the column type
-     *
-     * @see AbstractListHandler#handle(ResultSet)
+     * @see org.walkerljl.db.dbutil.handler.AbstractListHandler#handle(ResultSet)
      */
     // We assume that the user has picked the correct type to match the column
     // so getObject will return the appropriate type and the cast will succeed.
@@ -86,6 +84,6 @@ public class ColumnListHandler<T> extends AbstractListHandler<T> {
             return (T) rs.getObject(this.columnIndex);
         }
         return (T) rs.getObject(this.columnName);
-   }
+    }
 
 }

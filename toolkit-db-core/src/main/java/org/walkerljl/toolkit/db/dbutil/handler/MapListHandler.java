@@ -5,14 +5,12 @@ import java.sql.SQLException;
 import java.util.Map;
 
 import org.walkerljl.toolkit.db.dbutil.RowProcessor;
-import org.walkerljl.toolkit.db.dbutil.ResultSetHandler;
 
 /**
  * <code>ResultSetHandler</code> implementation that converts a
  * <code>ResultSet</code> into a <code>List</code> of <code>Map</code>s.
  * This class is thread safe.
  *
- * @see ResultSetHandler
  */
 public class MapListHandler extends AbstractListHandler<Map<String, Object>> {
 
@@ -34,7 +32,7 @@ public class MapListHandler extends AbstractListHandler<Map<String, Object>> {
      * Creates a new instance of MapListHandler.
      *
      * @param convert The <code>RowProcessor</code> implementation
-     * to use when converting rows into Maps.
+     *                to use when converting rows into Maps.
      */
     public MapListHandler(RowProcessor convert) {
         super();
@@ -43,12 +41,11 @@ public class MapListHandler extends AbstractListHandler<Map<String, Object>> {
 
     /**
      * Converts the <code>ResultSet</code> row into a <code>Map</code> object.
+     *
      * @param rs <code>ResultSet</code> to process.
      * @return A <code>Map</code>, never null.
-     *
      * @throws SQLException if a database access error occurs
-     *
-     * @see AbstractListHandler#handle(ResultSet)
+     * @see org.walkerljl.db.dbutil.handler.AbstractListHandler#handle(ResultSet)
      */
     @Override
     protected Map<String, Object> handleRow(ResultSet rs) throws SQLException {
