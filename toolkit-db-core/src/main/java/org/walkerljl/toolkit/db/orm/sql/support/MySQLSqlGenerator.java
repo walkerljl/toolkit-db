@@ -366,7 +366,7 @@ public class MySQLSqlGenerator<KEY, Entity> implements SqlGenerator<KEY, Entity>
         //校验实体对象是否有效
         AssertUtils.assertTrue(entity != null, MESSAGE_ENTITY_IS_NULL);
 
-        return getTable((Entity) entity.getClass());
+        return getTable((Class<Entity>)entity.getClass());
     }
 
     private String getTableName(Entity entity) {

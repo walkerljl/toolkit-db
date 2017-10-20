@@ -4,7 +4,7 @@
 
     <groupId>org.walkerljl</groupId>
     <artifactId>toolkit-db</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <modules>
         <module>toolkit-db-api</module>
         <module>toolkit-db-core</module>
@@ -17,11 +17,11 @@
 
     <properties>
         <jdk.version>1.6</jdk.version>
-        <org.walkerljl.toolkit.lang.version>1.0-SNAPSHOT</org.walkerljl.toolkit.lang.version>
-        <org.walkerljl.toolkit.logging.version>1.0-SNAPSHOT</org.walkerljl.toolkit.logging.version>
-        <org.walkerljl.toolkit.standard.version>1.0-SNAPSHOT</org.walkerljl.toolkit.standard.version>
-        <org.walkerljl.toolkit.cache.version>1.0-SNAPSHOT</org.walkerljl.toolkit.cache.version>
-        <org.walkerljl.configuration.version>1.0-SNAPSHOT</org.walkerljl.configuration.version>
+        <org.walkerljl.toolkit.lang.version>1.0.0-SNAPSHOT</org.walkerljl.toolkit.lang.version>
+        <org.walkerljl.toolkit.logging.version>1.0.0-SNAPSHOT</org.walkerljl.toolkit.logging.version>
+        <org.walkerljl.toolkit.standard.version>1.0.0-SNAPSHOT</org.walkerljl.toolkit.standard.version>
+        <org.walkerljl.toolkit.cache.version>1.0.0-SNAPSHOT</org.walkerljl.toolkit.cache.version>
+        <org.walkerljl.configuration.version>1.0.0-SNAPSHOT</org.walkerljl.configuration.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
